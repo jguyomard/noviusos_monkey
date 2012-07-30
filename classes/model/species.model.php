@@ -31,7 +31,11 @@ class Model_Species extends \Nos\Orm\Model {
             'single_id_property' => 'mksp_lang_single_id',
             'invariant_fields'   => array(),
         ),
-        'Nos\Orm_Behaviour_Url' => array(),
+        'Nos\Orm_Behaviour_Url' => array(
+            'urls' => array(
+                array('Nos\Monkey\Controller_Front', 'url_model'),
+            ),
+        ),
     );
 
     public function get_possible_lang() {

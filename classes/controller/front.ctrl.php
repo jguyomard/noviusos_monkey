@@ -285,4 +285,41 @@ class Controller_Front extends Controller_Front_Application {
         }
         return false;
     }
+
+
+    static function url_model($item, $first = false) {
+        \Config::load(APPPATH.'data'.DS.'config'.DS.'page_enhanced.php', 'page_enhanced');
+        $page_enhanced = \Config::get('page_enhanced', array());
+        $model = get_class($item);
+        $urls = array();
+        foreach ($page_enhanced['noviusos_monkey'] as $page_id => $params) {
+            if ($page = Model_Page::find($page_id)) {
+                $urlPath = mb_substr($page->get_href(), 0, -5).'/';
+                $temp_urls = array();
+                switch ($model) {
+                    case 'Nos\Monkey\Model_Monkey' :
+                        if ($page->page_lang === $item->monk_lang) {
+                            $temp_urls = static::get_url_model($item, array('urlPath' => $urlPath));
+                        }
+                        break;
+
+                    case 'Nos\Monkey\Model_Species' :
+                        if ($page->page_lang === $item->mksp_lang) {
+                            $temp_urls = static::get_url_model($item, array('urlPath' => $urlPath));
+                        }
+                        break;
+                }
+                $temp_urls = is_array($temp_urls) ? $temp_urls : array($temp_urls);
+                if ($first && count($temp_urls))
+                {
+                    return $temp_urls[0];
+                }
+                else
+                {
+                    $urls = array_merge($urls, $temp_urls);
+                }
+            }
+        }
+        return $urls;
+    }
 }

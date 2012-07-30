@@ -48,7 +48,11 @@ class Model_Monkey extends \Nos\Orm\Model {
         'Nos\Orm_Behaviour_Publishable' => array(
             'publication_bool_property' => 'monk_published',
         ),
-		'Nos\Orm_Behaviour_Url' => array(),
+		'Nos\Orm_Behaviour_Url' => array(
+            'urls' => array(
+                array('Nos\Monkey\Controller_Front', 'url_model'),
+            ),
+        ),
 	);
 
     public function get_possible_lang() {

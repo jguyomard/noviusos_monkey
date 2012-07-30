@@ -38,11 +38,6 @@ return array(
 		        'height' => 200,
 		        'ajax' => true,
 	        ),
-	        'models_url_enhanced' => array(
-		        'Nos\Monkey\Model_Monkey',
-                'Nos\Monkey\Model_Species',
-            ),
-	        'get_url_model' => array('Nos\Monkey\Controller_Front', 'get_url_model'),
         ),
     ),
 );
